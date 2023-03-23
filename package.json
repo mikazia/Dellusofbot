@@ -1,0 +1,20 @@
+{
+  "name": "dellusofbot",
+  "version": "1.2.6",
+  "description": "💗 un module node.js qui vous permet de créer vos propres bots Discord💗",
+  "keywords": [
+    "botmaker",
+    "botbuilder",
+    "ownbot"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikazia",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.0.0",
+    "dotenv": "^8.2.0"
+  }
+}
