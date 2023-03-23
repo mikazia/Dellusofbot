@@ -170,5 +170,19 @@ BotSay(message) {
 YourAvatar(message) {
     return message.author.avatarURL();
   }
+async BotPp(channel) {
+    // R�cup�rer l'URL de la photo de profil du bot
+    const botAvatarUrl = await this.client.user.displayAvatarURL();
+
+    // Envoyer un message avec la photo de profil du bot dans le channel
+    await channel.send({
+      files: [botAvatarUrl],
+      embed: {
+        image: {
+          url: botAvatarUrl,
+        },
+      },
+    });
+}
 }
 module.exports = Dellubot;
