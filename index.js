@@ -194,5 +194,19 @@ async serveurMembres(message) {
     const nbMembres = fetchResult.size;
     message.reply(`Le serveur contient ${nbMembres} membres.`);
   }
+async getBotOwner() {
+    const application = await this.client.fetchApplication();
+    const owner = await this.client.users.fetch(application.owner.id);
+    return `${owner.username}#${owner.discriminator}`;
+  }
+async ajouterReactions(message, reactions) {
+  try {
+    for (let reaction of reactions) {
+      await message.react(reaction);
+    }
+  } catch (error) {
+    console.error(`Erreur lors de l'ajout des r�actions : ${error}`);
+  }
+      }
 }
 module.exports = Dellubot;
