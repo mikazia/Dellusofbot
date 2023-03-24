@@ -184,5 +184,15 @@ async BotPp(channel) {
       },
     });
 }
+async serveurMembres(message) {
+    const guild = message.guild;
+    if (!guild) {
+      message.reply("Impossible d'obtenir le serveur.");
+      return;
+    }
+    const fetchResult = await guild.members.fetch();
+    const nbMembres = fetchResult.size;
+    message.reply(`Le serveur contient ${nbMembres} membres.`);
+  }
 }
 module.exports = Dellubot;

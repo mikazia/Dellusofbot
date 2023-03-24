@@ -1,7 +1,7 @@
 {
   "name": "dellusofbot",
-  "version": "1.2.7",
-  "description": "💗 un module node.js qui vous permet de créer vos propres bots Discord💗",
+  "version": "1.2.8",
+  "description": "💗💜 un module node.js conçu pour créer son Propre bot discord facilement 💜💗",
   "keywords": [
     "botmaker",
     "botbuilder",
