@@ -218,5 +218,25 @@ BotCreationAnnée() {
     const creationDate = this.client.user.createdAt;
     return creationDate.getFullYear();
   }
+async afficherListeEmojis(message) {
+    const guild = message.guild;
+    const emojis = guild.emojis.cache.array();
+
+    const embed = {
+      color: Math.floor(Math.random() * 16777215), // Couleur random
+      title: `Liste des emojis de ${guild.name}`,
+      description: emojis.join(' '),
+    };
+
+    await message.channel.send({ embed });
+  }
+MentionUser(message) {
+    const user = message.mentions.users.first();
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
+  }
 }
 module.exports = Dellubot;
