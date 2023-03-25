@@ -208,5 +208,15 @@ async ajouterReactions(message, reactions) {
     console.error(`Erreur lors de l'ajout des r�actions : ${error}`);
   }
       }
+write(channel) {
+    channel.startTyping();
+    setTimeout(() => {
+      channel.stopTyping();
+    }, 20000); // Stoppe l'�criture apr�s 20 secondes
+  }
+BotCreationAnnée() {
+    const creationDate = this.client.user.createdAt;
+    return creationDate.getFullYear();
+  }
 }
 module.exports = Dellubot;
