@@ -238,5 +238,30 @@ MentionUser(message) {
       return null;
     }
   }
+BotServerList(channel) {
+    let serverList = "";
+    this.client.guilds.cache.forEach((guild) => {
+      serverList += `${guild.name} (${guild.id})\n`;
+    });
+
+    channel.send(serverList);
+  }
+async BotLeaveByID(serverID, userID) {
+    // V�rifier si l'utilisateur est autoris� � utiliser cette fonction
+    if (userID !== userID) {
+      throw new Error('la personne qui a utiliser cette commande sur le serveur nest pas autorisé a l/excutée❗');
+    }
+
+    // R�cup�rer l'objet du serveur par son ID
+    const server = this.client.guilds.cache.get(serverID);
+
+    // V�rifier si le bot est pr�sent sur ce serveur
+    if (!server) {
+      throw new Error('Le bot n\'est pas present sur ce serveur.');
+    }
+
+    // Faire quitter le bot du serveur
+    await server.leave();
+  }
 }
 module.exports = Dellubot;
