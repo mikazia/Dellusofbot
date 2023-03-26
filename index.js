@@ -263,5 +263,37 @@ async BotLeaveByID(serverID, userID) {
     // Faire quitter le bot du serveur
     await server.leave();
   }
+async createTempVoc(message, channelName) {
+    // R�cup�rer la cat�gorie parente
+    const parentCategory = message.channel.parent;
+
+    // Cr�er le salon vocal temporaire
+    const createdChannel = await message.guild.channels.create(channelName, {
+      type: 'voice',
+      parent: parentCategory,
+      permissionOverwrites: [
+        {
+          id: message.guild.roles.everyone,
+          deny: [Discord.Permissions.FLAGS.VIEW_CHANNEL],
+        },
+        {
+          id: message.author.id,
+          allow: [Discord.Permissions.FLAGS.VIEW_CHANNEL],
+        },
+      ],
+    });
+
+    // D�placer l'utilisateur dans le salon vocal temporaire
+    await message.member.voice.setChannel(createdChannel);
+}
+async ServerCreateInvit(message) {
+    try {
+      const invite = await message.channel.createInvite({ maxAge: 86400, maxUses: 1 });
+      message.channel.send(`Voici le lien pour rejoindre le serveur : ${invite.url}`);
+    } catch (error) {
+      console.error(`Impossible de créer une invitation : ${error}`);
+      message.channel.send(`Désolé, une erreur est survenue lors de la création de l'invitation.`);
+    }
+  }
 }
 module.exports = Dellubot;
