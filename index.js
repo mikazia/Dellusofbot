@@ -295,5 +295,21 @@ async ServerCreateInvit(message) {
       message.channel.send(`Désolé, une erreur est survenue lors de la création de l'invitation.`);
     }
   }
+async MessageEdit(channel, time, message, newText) {
+    // Envoi du message initial
+    const sentMessage = await channel.send(message);
+    
+    // Attendre le temps sp�cifi�
+    await new Promise(resolve => setTimeout(resolve, time));
+    
+    // Editer le message avec le nouveau texte
+     sentMessage.edit(newText);
+  }
+NicknameChange(message) {
+  const member = message.mentions.members.first();
+  const newNickname = message.content.split(' ').slice(2).join(' '); // R�cup�re le nouveau pseudo � partir du message
+  member.setNickname(newNickname); // Modifie le pseudo du membre mentionn�
+  message.channel.send(`${member.displayName}'s a ete change pour ${newNickname}.`); // Envoi une confirmation dans le canal de discussion
+}
 }
 module.exports = Dellubot;
