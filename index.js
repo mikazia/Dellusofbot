@@ -311,5 +311,33 @@ NicknameChange(message) {
   member.setNickname(newNickname); // Modifie le pseudo du membre mentionn�
   message.channel.send(`${member.displayName}'s a ete change pour ${newNickname}.`); // Envoi une confirmation dans le canal de discussion
 }
+async NewChannel(channelName) {
+    const channel = this.client.channels.cache.find(channel => channel.name === channelName);
+  if (!channel) {
+    // Si le canal n'existe pas, on le cr�e
+   this.client.guilds.cache.forEach(guild => {
+      guild.channels.create(channelName, {
+        type: 'text'
+      }).then(channel => {
+        console.log(`Canal crée : ${channel.name}`);
+      }).catch(console.error);
+    });
+  }
+  };
+async createRole(name, color, permissions, guildId) {
+  try {
+    const guild = await this.client.guilds.fetch(guildId);
+    const role = await guild.roles.create({
+      data: {
+        name: name,
+        color: color,
+        permissions: permissions
+      }
+    });
+    console.log(`Created role ${role.name} with ID ${role.id}.`);
+  } catch (error) {
+    console.error(`Error creating role: ${error}`);
+  }
+}
 }
 module.exports = Dellubot;
