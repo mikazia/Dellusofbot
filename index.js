@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const path = require('path');
 const fs = require('fs').promises;
-
+const fetch = require('node-fetch');
+const axios = require('axios');
 class Dellubot {
   constructor() {
     this.client = new Discord.Client();
@@ -339,5 +340,49 @@ async createRole(name, color, permissions, guildId) {
     console.error(`Error creating role: ${error}`);
   }
 }
+async randomDog(message) {
+    try {
+      // Appel à l'API "Dog CEO" pour récupérer une image de chien aléatoire
+      const response = await fetch('https://dog.ceo/api/breeds/image/random');
+      const data = await response.json();
+
+      // Envoie l'image de chien dans le canal Discord
+      const dogImage = new Discord.MessageAttachment(data.message);
+      message.channel.send(dogImage);
+    } catch (error) {
+      console.error(error);
+      message.channel.send('Désolé, je n\'ai pas pu récupérer d\'image de chien.');
+    }
+  }
+async randomCat(message) {
+    try {
+      // Appel à l'API "TheCatApi" pour récupérer une image de chat aléatoire
+      const response = await fetch('https://api.thecatapi.com/v1/images/search');
+      const data = await response.json();
+
+      // Envoie l'image de chat dans le canal Discord
+      const catImage = new Discord.MessageAttachment(data[0].url);
+      message.channel.send(catImage);
+    } catch (error) {console.error(error);
+      message.channel.send('Désolé, je n\'ai pas pu récupérer d\'image de chat.');
+    }
+  }
+async randomImg(message) {
+    try {
+      // Récupérer une image de bébé aléatoire depuis une API
+      const response = await axios.get('https://picsum.photos/200/300/?random', { responseType: 'arraybuffer' });
+
+      // Envoyer l'image de bébé au channel Discord qui a envoyé le message
+      message.channel.send({
+        files: [{
+          attachment: response.data,
+          name: 'baby.jpg'
+        }]
+      });
+    } catch (error) {
+      console.error(error);
+      message.channel.send('Désolé, je n\'ai pas réussi à génétrer une image aleatoire,il y a eu un soucis avec Dellusofbot ❗ou votre propre code');
+    }
+  }
 }
 module.exports = Dellubot;
