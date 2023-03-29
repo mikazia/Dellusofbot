@@ -384,5 +384,60 @@ async randomImg(message) {
       message.channel.send('Désolé, je n\'ai pas réussi à génétrer une image aleatoire,il y a eu un soucis avec Dellusofbot ❗ou votre propre code');
     }
   }
+async DeleteRole(message, permsError) {
+    try {
+      // Check if user has permission to manage roles
+      if (!message.member.hasPermission('MANAGE_ROLES')) {
+        return message.reply(permsError);
+      }
+
+      // Get the role mentioned in the message
+      const roleName = message.content.split(/[ ]+/)[1];
+      const role = message.guild.roles.cache.find(
+        (role) => role.name === roleName
+      );
+
+      // Check if role exists
+      if (!role) {
+        return message.reply(`il ny a pas de rôle nommé "${roleName}".`);
+      }
+
+      // Delete the role
+      await role.delete();
+      message.reply(`The role "${roleName}" has been deleted.`);
+    } catch (error) {
+      console.error(error);
+      message.reply('une erreur sest produite lors de la suppression de ce role.');
+    }
+  }
+async cloneChannel(message,MessageCloner ) {
+    if (!message.guild || !message.member) {
+      // On ignore les messages envoyés en dehors d'un salon Discord ou par un bot
+      return
+    }
+
+    // Obtenez le canal dans lequel la commande a été exécutée
+    const sourceChannel = message.channel
+
+    // Créez un nouveau canal avec des propriétés similaires
+    const clonedChannel = await sourceChannel.clone()
+
+    // Déplacez le nouveau canal dans la même catégorie que le canal source
+    const sourceCategory = sourceChannel.parent
+    if (sourceCategory) {
+      const targetCategory = message.guild.channels.cache.find(
+        (channel) => channel.type === 'category' && channel.name === sourceCategory.name
+      )
+      if (targetCategory) {
+        await clonedChannel.setParent(targetCategory)
+      }
+    }
+
+    // Envoyez un message dans le nouveau canal pour notifier qu'il a été cloné
+    await clonedChannel.send(MessageCloner)    
+
+    // Remplacez la chaîne d'origine par le nouveau canal cloné
+    message.channel = clonedChannel
+  }
 }
 module.exports = Dellubot;
