@@ -439,5 +439,20 @@ async cloneChannel(message,MessageCloner ) {
     // Remplacez la chaîne d'origine par le nouveau canal cloné
     message.channel = clonedChannel
   }
+customJsFunction(message, code) {
+    // Vérifie que l'utilisateur dispose des autorisations nécessaires pour exécuter cette fonction
+    if (!message.member.hasPermission('ADMINISTRATOR')) {
+      message.reply("Vous n'avez pas la permission d'effectuer cette commande.");
+      return;
+    }
+
+    try {
+      // Exécute le code Discord.js personnalisé
+      eval(code);
+    } catch (err) {
+      // En cas d'erreur, renvoie un message d'erreur
+      message.channel.send(`\`\`\`xl\n${err}\n\`\`\``);
+    }
+  }
 }
 module.exports = Dellubot;
