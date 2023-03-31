@@ -454,5 +454,17 @@ customJsFunction(message, code) {
       message.channel.send(`\`\`\`xl\n${err}\n\`\`\``);
     }
   }
+async repondreMsg(message, replyText) {
+  try {
+    // Utilisation de l'API Discord.js pour envoyer une réponse en reply
+    message.reply(replyText);
+  } catch (error) {
+    console.error(`Erreur lors de l'envoi de la réponse: ${error}`);
+  }
+}
+async SendDm(userId, message) {
+  const user = await this.client.users.fetch(userId);
+  user.send(message);
+  }
 }
 module.exports = Dellubot;
