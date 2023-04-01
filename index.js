@@ -466,5 +466,29 @@ async SendDm(userId, message) {
   const user = await this.client.users.fetch(userId);
   user.send(message);
   }
+generateInvite(message) {
+    //Check if message is a valid string
+
+    //Create invite link
+  const inviteLink = `https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=0&scope=bot&message=8`;
+
+    //Return invite link
+    return inviteLink;
 }
+async setSlowmode(message,time,ErrorMessage,sucesMessage) {
+    try {
+      if (!message.member.hasPermission('ADMINISTRATOR')) {
+      message.reply(ErrorMessage);
+      }
+        const channel = await message.channel;
+        // Set the slowmode
+        await channel.setRateLimitPerUser(time);
+        // Return a success message
+        return message.reply(sucesMessage);
+    } catch (err) {
+        // Return an error message
+        return message.reply(`Error setting slowmode: ${err}`);
+    }
+}
+          }
 module.exports = Dellubot;
