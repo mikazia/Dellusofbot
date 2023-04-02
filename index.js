@@ -7,6 +7,7 @@ class Dellubot {
   constructor() {
     this.client = new Discord.Client();
     let token;
+    this.serverName = "";
     this.token = token;
 this.rootDir = process.cwd();
     this.commandsDir = path.resolve(this.rootDir, 'commands');
@@ -490,5 +491,19 @@ async setSlowmode(message,time,ErrorMessage,sucesMessage) {
         return message.reply(`Error setting slowmode: ${err}`);
     }
 }
-          }
+ServerName(message) {
+    this.serverName = message.guild.name;
+    return this.serverName;
+  }
+closeChannel(message, channelName, errorMessage) {
+    if (!channelName) {
+        throw new Error('No channel name provided');
+    }
+    let channel = message.guild.channels.cache.find(channel => channel.name === channelName);
+    if (!channel) {
+        throw new Error(errorMessage);
+    }
+    channel.delete();
+} 
+}
 module.exports = Dellubot;
