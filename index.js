@@ -505,5 +505,26 @@ closeChannel(message, channelName, errorMessage) {
     }
     channel.delete();
 } 
+async AddEmoji(serverId, emojiUrl, name) {
+  try {
+    const response = await fetch(emojiUrl);
+    const buffer = await response.buffer();
+    const emoji = await this.client.guilds.cache.get(serverId).emojis.create(buffer, name);
+    console.log(`Emoji ${emoji.name} ajout� avec succ�s!`);
+  } catch (error) {
+    console.error('Erreur:', error);
+  }
+}
+reverseText(message) {
+    // V�rifier que le message provient d'un utilisateur
+    if (!message.author.bot) {
+      // R�cup�rer le texte du message
+      const text = message.content;
+      // Renverser le texte
+      const reversedText = text.split('').reverse().join('');
+      // Envoyer le texte renvers� � l'utilisateur
+      message.channel.send(`${reversedText}`);
+    }
+  }
 }
 module.exports = Dellubot;

@@ -30,3 +30,19 @@ bot.botToken(TOKEN);
 ```
 
 pour plus d'exemple et de setup---->voir la documentation 
+
+💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗
+
+USAGE DE DELLUSOFBOT
+-------
+
+UTILISEZ DELLUSOFBOT SI :
+
+- VOUS SOUHAITEZ CRÉER FACILEMENT VOTRE PROPRE BOT DISCORD
+- SI VOUS VOULEZ CRÉER DES BOTS POUR VOS SERVEURS
+- SI VOUS NE COMPRENEZ PAS LES BIBLIOTHÈQUES COMME DISCORD.JS
+
+vous pouvez ENVISAGER DAUTRES PACKAGES OU BIBLIOTHÈQUES SI :
+
+- votre but est de créer des bots destiné a etre certifié et a rejoindre plus de 100 serveurs
+- si vous voulez créer des bots en lua,elixir ou encore julia (dellusofbot est seulement pour node.js pour le moment)
